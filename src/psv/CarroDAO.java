@@ -23,10 +23,18 @@ public class CarroDAO {
         String sql = "insert into carro(placa,cor,descricao) values(?,?,?)";
         
         try{
-            PrepareStatement ps = getCon().prepareStatement(sql);
+            PreparedStatement ps = getCon().prepareStatement(sql);
             ps.setString(1, carro.getPlaca());
             ps.setString(2, carro.getCor());
             ps.setString(3, carro.getDescricao());
+            
+            if (ps.executeUpdate() > 0) {
+                return "Inserido com sucesso.";
+            } else {
+                return "Erro ao inserir";
+            }catch (SQLException e){
+                    return e.getMessage;
+                    }
         }
     }
 }
