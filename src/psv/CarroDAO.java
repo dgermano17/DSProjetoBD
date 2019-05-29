@@ -20,7 +20,7 @@ public class CarroDAO {
 
     public String inserir(CarroBean carro){
         
-        String sql = "insert into carro(placa,cor,descricao) values(?,?,?)";
+        String sql = "insert into carro(placa,cor,descricao)values(?,?,?)";
         
         try{
             PreparedStatement ps = getCon().prepareStatement(sql);
@@ -83,4 +83,5 @@ public class CarroDAO {
         }
         
     }
+    
 }

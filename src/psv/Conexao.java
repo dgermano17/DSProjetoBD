@@ -28,7 +28,7 @@ public class Conexao {
         
     }
     
-    public static void fechatConexao(Connection con){
+    public static void fecharConexao(Connection con){
         
         try{
             con.close();
