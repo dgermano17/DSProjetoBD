@@ -56,4 +56,31 @@ public class CarroDAO {
             return e.getMessage();
         }
     }
+    
+    public List<CarroBean> listarTodos(){
+        String sql = "select * from carro";
+        
+        List<CarroBean> listaCarro = new ArrayList<CarroBean>();
+        
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null){
+                while(rs.next()){
+                    CarroBean cb = new CarroBean();
+                    cb.setPlaca(rs.getString(1));
+                    cb.setCor(rs.getString(2));
+                    cb.setDescricao(rs.getString(3));
+                    listaCarro.add(cb);
+                }
+            return listaCarro;
+            }else{
+                return null;
+            }
+        }catch (SQLException e){
+            return null;
+        }
+        
+    }
 }
