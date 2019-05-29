@@ -32,9 +32,28 @@ public class CarroDAO {
                 return "Inserido com sucesso.";
             } else {
                 return "Erro ao inserir";
-            }catch (SQLException e){
-                    return e.getMessage;
-                    }
+            }
+            
+        }catch (SQLException e){
+                    return e.getMessage();
+        }
+    }
+    
+    public String deletar(CarroBean carro){
+        String sql = "delete from carro where placa = ?";
+        
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setString(1, carro.getPlaca());
+        
+        
+        if (ps.executeUpdate() > 0) {
+                return "Removido com sucesso.";
+            } else {
+                return "Erro ao remover";
+            }
+        }catch (SQLException e){
+            return e.getMessage();
         }
     }
 }
