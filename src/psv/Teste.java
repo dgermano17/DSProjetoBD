@@ -11,9 +11,15 @@ public class Teste {
         CarroBean cb = new CarroBean();
         CarroDAO cd = new CarroDAO(con);
 
-        cb.setPlaca("JKK1900");
-        cb.setCor("Azul");
-        cb.setDescricao("Carro1");
-        System.out.println(cd.inserir(cb));
+        List<CarroBean> lista = cd.listarTodos();
+        
+        if(lista != null){
+            for(CarroBean carro : lista){
+                System.out.println("Placa: "+carro.getPlaca());
+                System.out.println("Cor: "+carro.getCor());
+                System.out.println("Descricao: "+carro.getDescricao());
+                
+            }
+        }
     }
 }
