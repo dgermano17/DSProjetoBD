@@ -7,6 +7,7 @@
 package psv;
 import javax.swing.table.*;
 import java.sql.*;
+import java.util.*;
 
 public class fmCarro extends javax.swing.JFrame {
 
@@ -175,6 +176,11 @@ public class fmCarro extends javax.swing.JFrame {
         });
 
         btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPesquisarMouseClicked(evt);
+            }
+        });
 
         btnLimpar.setText("Limpar");
         btnLimpar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -350,6 +356,32 @@ public class fmCarro extends javax.swing.JFrame {
         lblMsg.setText(cd.inserir(cb));
         Conexao.fecharConexao(con);
     }//GEN-LAST:event_btnInserirMouseClicked
+
+    private void btnPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPesquisarMouseClicked
+        Connection con = Conexao.abrirConexao();
+        CarroDAO cd = new CarroDAO(con);
+        
+        List<CarroBean> listaCarro = new ArrayList<CarroBean>();
+        listaCarro = cd.listarTodos();
+        
+        DefaultTableModel tbm = (DefaultTableModel)tblConsulta.getModel();
+        
+        for(int i = tbm.getRowCount()-1; i >= 0; i--){
+            tbm.removeRow(1);
+        }
+        
+       int i = 0;
+       
+       for(CarroBean cb : listaCarro){
+           tbm.addRow(new String[1]);
+           
+           tblConsulta.setValueAt(cb.getPlaca(), i, 0);
+           tblConsulta.setValueAt(cb.getCor(), i, 1);
+           tblConsulta.setValueAt(cb.getDescricao(), i, 2);
+           i++;
+       }
+       Conexao.fecharConexao(con);
+    }//GEN-LAST:event_btnPesquisarMouseClicked
 
     /**
      * @param args the command line arguments
